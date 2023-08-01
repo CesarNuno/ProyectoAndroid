@@ -2,4 +2,16 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="mainPurple">#44026C</color>
+    <color name="redPurple">#3A001D</color>
+    <color name="tintPurple">#470034</color>
+    <color name="Purple">#540050</color>
+    <color name="PurpleH">#500060</color>
+    <color name="PurpleH2">#44026C</color>
+    <color name="PurpleL">#4C2281</color>
+    <color name="PurpleL2">#584496</color>
+    <color name="PurpleL3">#6966AA</color>
+    <color name="PurpleL4">#888DBE</color>
+    <color name="WhitePurple">#AAB4D1</color>
+    <color name="WhitePurple2">#CCD7E4</color>
 </resources>

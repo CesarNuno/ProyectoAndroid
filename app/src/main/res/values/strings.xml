@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ProyectoAndroid</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sig">Siguiente</string>
+    <string name="ant">Anterior</string>
 </resources>

@@ -5,14 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+    <TextView
+        android:id="@+id/tvArtistas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Top Artistas del Día"
+        android:textSize="25sp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAlignment="center"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvArtistas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvArtistas"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tvCanciones"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        android:text="Top Canciones del Día"
+        android:textSize="25sp"
+        app:layout_constraintTop_toBottomOf="@id/rvArtistas"
+        android:textAlignment="center"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCancioes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvCanciones"/>
+    </LinearLayout>
+</ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
