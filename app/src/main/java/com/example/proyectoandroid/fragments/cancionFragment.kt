@@ -9,10 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.proyectoandroid.MainActivity
 import com.example.proyectoandroid.R
 import com.example.proyectoandroid.adapters.music_rv_adapter
-import com.example.proyectoandroid.databinding.ActivityMainBinding
-import com.example.proyectoandroid.databinding.MusicCardItemBinding
 import com.example.proyectoandroid.databinding.MusicRecyclerViewBinding
-import com.example.proyectoandroid.models.Songs
+import com.example.proyectoandroid.interfaces.ApiMusicService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Url
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,6 +34,9 @@ class cancionFragment : Fragment() {
     private var param2: String? = null
     private var _binding: MusicRecyclerViewBinding? = null
     private val binding get() = _binding!!
+    private val songImages = mutableListOf<String>()
+    private lateinit var musicRvAdapter: music_rv_adapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,23 +46,13 @@ class cancionFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val layoutManager =  LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL,false)
-        this._binding = MusicRecyclerViewBinding.inflate(layoutInflater,container,false)
-        binding.rvMusic.layoutManager = layoutManager
-        binding.rvMusic.adapter = music_rv_adapter(
-        listOf(
-            Songs(resources.getDrawable(R.drawable.inaugh,null),"Ina"),
-            Songs(resources.getDrawable(R.drawable.inaugh,null),"Ina"),
-            Songs(resources.getDrawable(R.drawable.inaugh,null),"Ina"),
-            Songs(resources.getDrawable(R.drawable.inaugh,null),"Ina"),
-        )
-        )
+        _binding = MusicRecyclerViewBinding.inflate(layoutInflater)
+        initRecycler()
+        insertSongImages()
         return binding.root
+
     }
     override fun onDestroy() {
         super.onDestroy()
@@ -79,5 +76,41 @@ class cancionFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+    private fun initRecycler(){
+        val HLayoutManager =  LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL,false)
+        musicRvAdapter = music_rv_adapter(songImages)
+        binding.rvMusic.layoutManager = HLayoutManager
+        binding.rvMusic.adapter = musicRvAdapter
+    }
+
+    private fun getRetrofit(base_url_resource:Int): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(resources.getString(base_url_resource))
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+    private fun insertSongImages(){
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = getRetrofit(R.string.api_url_songs).create(ApiMusicService::class.java).consultaMusic("canciones")
+            val songs = response.body()
+            getActivity()?.runOnUiThread{
+                if(response.isSuccessful){
+                    if(songs?.nombre != ""){
+                        val list = listOf(
+                            songs?.imagen!!
+                        )
+                        songImages.clear()
+                        songImages.addAll(list)
+                    }else
+                        songImages.clear()
+                    musicRvAdapter.notifyDataSetChanged()
+
+                }else{
+                    songImages.clear()
+                    musicRvAdapter.notifyDataSetChanged()
+                }
+            }
+        }
     }
 }

@@ -4,4 +4,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sig">Siguiente</string>
     <string name="ant">Anterior</string>
+    <string name="api_url_songs">https://api.musica.alphadev.io/api/v1/</string>
 </resources>
