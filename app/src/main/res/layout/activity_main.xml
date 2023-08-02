@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/black">
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -21,12 +22,15 @@
         android:text="Top Artistas del Día"
         android:textSize="25sp"
         app:layout_constraintTop_toTopOf="parent"
-        android:textAlignment="center"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvArtistas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvArtistas"/>
+        android:textAlignment="center"
+        android:textColor="@color/white"/>
+        <FrameLayout
+            android:id="@+id/frmArtist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvCanciones">
+            ></FrameLayout>
 
     <TextView
         android:id="@+id/tvCanciones"
@@ -34,13 +38,16 @@
         android:layout_height="wrap_content"
         android:text="Top Canciones del Día"
         android:textSize="25sp"
-        app:layout_constraintTop_toBottomOf="@id/rvArtistas"
-        android:textAlignment="center"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCancioes"
+        app:layout_constraintTop_toBottomOf="@id/frmArtist"
+        android:textAlignment="center"
+        android:textColor="@color/white"/>
+    <FrameLayout
+        android:id="@+id/frmMusic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvCanciones"/>
+        app:layout_constraintTop_toBottomOf="@id/tvCanciones"
+        >
+    </FrameLayout>
     </LinearLayout>
 </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
