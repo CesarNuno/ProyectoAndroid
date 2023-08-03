@@ -1,6 +1,7 @@
 package com.example.proyectoandroid.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.example.proyectoandroid.R
 import com.example.proyectoandroid.adapters.music_rv_adapter
 import com.example.proyectoandroid.databinding.MusicRecyclerViewBinding
 import com.example.proyectoandroid.interfaces.ApiMusicService
+import com.example.proyectoandroid.models.Canciones
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,6 +35,7 @@ class cancionFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var _binding: MusicRecyclerViewBinding? = null
+    private lateinit var listadoCanciones: MutableList<Canciones>
     private val binding get() = _binding!!
     private val songImages = mutableListOf<String>()
     private lateinit var musicRvAdapter: music_rv_adapter
@@ -40,6 +43,7 @@ class cancionFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        listadoCanciones = mutableListOf()
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -59,15 +63,6 @@ class cancionFragment : Fragment() {
         _binding = null
     }
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment cancionFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             cancionFragment().apply {
@@ -94,14 +89,19 @@ class cancionFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             val response = getRetrofit(R.string.api_url_songs).create(ApiMusicService::class.java).consultaMusic("canciones")
             val songs = response.body()
-            getActivity()?.runOnUiThread{
+            activity?.runOnUiThread{
                 if(response.isSuccessful){
-                    if(songs?.nombre != ""){
-                        val list = listOf(
-                            songs?.imagen!!
-                        )
+                    if(songs?.result?.size() != 0){
                         songImages.clear()
-                        songImages.addAll(list)
+                        for (key in songs!!.result!!.asJsonArray){
+                            val can: Canciones = Canciones(key.asJsonObject.get("nombre").asString,key.asJsonObject.get("duracion").asFloat,
+                                key.asJsonObject.get("id").asInt,key.asJsonObject.get("album").asString,key.asJsonObject.get("ayo").asInt,
+                                key.asJsonObject.get("imagen").asString,key.asJsonObject.get("audio").asString,key.asJsonObject.get("artista").asString)
+                            listadoCanciones.add(can)
+                        }
+                        for (item in listadoCanciones){
+                            item.imagen?.let { songImages.add(it) }
+                        }
                     }else
                         songImages.clear()
                     musicRvAdapter.notifyDataSetChanged()

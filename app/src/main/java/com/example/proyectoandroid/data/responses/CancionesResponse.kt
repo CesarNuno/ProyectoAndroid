@@ -1,14 +1,7 @@
 package com.example.proyectoandroid.data.responses
 
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
 import retrofit2.http.Url
 
-data class CancionesResponse(
-    val nombre :String?,
-    val duracion:Float?,
-    val id:Int?,
-    val album:String?,
-    val ayo:Int?,
-    val imagen:String?,
-    val audio:String?,
-    val artisa:String?
-    )
+data class CancionesResponse(val result:JsonArray?)
