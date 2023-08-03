@@ -1,5 +1,6 @@
 package com.example.proyectoandroid
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.proyectoandroid.databinding.ActivityMainBinding
@@ -18,5 +19,9 @@ class MainActivity : AppCompatActivity() {
             .add(R.id.frmMusic, cancionFragment.newInstance("Valor1","Valor2"))
             .add(R.id.frmArtist, artistaFragment.newInstance("Valor1","Valor2"))
             .commit()
+
+        binding.btnPlayer.setOnClickListener{
+            startActivity(Intent(this,PlayerActivity::class.java))
+        }
     }
 }

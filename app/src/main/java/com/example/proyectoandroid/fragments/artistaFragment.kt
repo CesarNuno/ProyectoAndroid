@@ -35,6 +35,7 @@ class artistaFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var _binding: ArtistRecyclerViewBinding? = null
+    private val HLayoutManager =  LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL,false)
     private val binding get() = _binding!!
     private lateinit var listadoArtistas: MutableList<String>
     private lateinit var artistRvAdapter: artist_rv_adapter
@@ -49,7 +50,7 @@ class artistaFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
         _binding = ArtistRecyclerViewBinding.inflate(layoutInflater)
-        binding.rvArtist.layoutManager = LinearLayoutManager(this.context)
+        binding.rvArtist.layoutManager = HLayoutManager
         initRecycler()
         insertArtists()
         return binding.root
