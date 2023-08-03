@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="NewBlack">#20262E</color>
     <color name="white">#FFFFFFFF</color>
     <color name="mainPurple">#44026C</color>
     <color name="redPurple">#3A001D</color>
