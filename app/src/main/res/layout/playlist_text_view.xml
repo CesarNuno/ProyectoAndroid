@@ -15,7 +15,7 @@
             android:textColor="@color/white"
             android:background="@android:color/transparent"
             android:fontFamily="sans-serif-smallcaps"
-            android:textSize="15dp"
+            android:textSize="20dp"
             />
     </LinearLayout>
 
