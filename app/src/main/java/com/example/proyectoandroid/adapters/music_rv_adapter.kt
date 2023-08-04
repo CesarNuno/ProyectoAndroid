@@ -16,6 +16,8 @@ class music_rv_adapter(val musicList:List<String>): RecyclerView.Adapter<music_r
         val binding = MusicCardItemBinding.bind(view)
         fun bind(image: String){
             binding.albumImage.fromUrl(image)
+            binding.relLayoutCardMusic.setBackgroundColor(0x00000000)
+            binding.relLayoutCardMusic2.setBackgroundColor(0x00000000)
         }
     }
 

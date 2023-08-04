@@ -1,11 +1,18 @@
 package com.example.proyectoandroid.fragments
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.example.proyectoandroid.MainActivity
+import com.example.proyectoandroid.PlayerActivity
+import com.example.proyectoandroid.PlaylistActivity
 import com.example.proyectoandroid.R
+import com.example.proyectoandroid.SongsActivity
+import com.example.proyectoandroid.databinding.FragmentMenuBinding
+import com.example.proyectoandroid.databinding.MusicRecyclerViewBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,7 +28,8 @@ class menuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    private var _binding: FragmentMenuBinding? = null
+    private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,7 +43,24 @@ class menuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false)
+        _binding = FragmentMenuBinding.inflate(layoutInflater)
+        binding.btnPlayer.setOnClickListener{
+            val intent = Intent(activity, PlayerActivity::class.java)
+            startActivity(intent)
+        }
+        binding.btnSongs.setOnClickListener{
+            val intent = Intent(activity, SongsActivity::class.java)
+            startActivity(intent)
+        }
+        binding.btnHome.setOnClickListener{
+            val intent = Intent(activity, MainActivity::class.java)
+            startActivity(intent)
+        }
+        binding.btnPlaylist.setOnClickListener{
+            val intent = Intent(activity, PlaylistActivity::class.java)
+            startActivity(intent)
+        }
+        return binding.root
     }
 
     companion object {
