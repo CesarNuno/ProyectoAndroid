@@ -15,6 +15,15 @@
         android:theme="@style/Theme.ProyectoAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".PlaylistActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SongsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SongsActivty"
+            android:exported="false" />
+        <activity
             android:name=".PlayerActivity"
             android:exported="false" />
         <activity

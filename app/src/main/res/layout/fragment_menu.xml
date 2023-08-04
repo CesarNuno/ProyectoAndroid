@@ -3,38 +3,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.menuFragment">
+    tools:context=".fragments.menuFragment"
+    android:background="@android:color/transparent">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
         <ImageButton
+            android:id="@+id/btnHome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/white"
             android:contentDescription="@string/ant"
-            android:src="@drawable/home" />
+            android:src="@drawable/home"
+            android:background="@android:color/transparent"/>
         <ImageButton
+            android:id="@+id/btnPlayer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/ant"
             android:src="@drawable/reproductor" />
         <ImageButton
+            android:id="@+id/btnSongs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/ant"
             android:src="@drawable/canciones" />
         <ImageButton
+            android:id="@+id/btnPlaylist"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/ant"
             android:src="@drawable/playlist" />
     </LinearLayout>
